@@ -13,7 +13,7 @@ const App: FC = () => {
   const dispatch = useDispatch<TThunkDispatch>();
   const postState = useSelector(postsStateSelector);
   useEffect(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchPosts(null));
   }, []);
 
   return (
