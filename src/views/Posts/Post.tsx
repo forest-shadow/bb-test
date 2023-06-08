@@ -2,19 +2,18 @@ import type { FC } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import type { IPost } from './Post.types';
+import { blue } from '@mui/material/colors';
 
-const defaultProps: Partial<IPost> = {
-  title: 'Lizard',
-  body: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-};
+import type { IPost } from 'types/Post.types';
+
 interface PostProps {
-  post: Partial<IPost>;
+  post: IPost;
+  isSelected: boolean;
 }
-export const Post: FC<Partial<PostProps>> = ({ post = defaultProps }) => {
+export const Post: FC<PostProps> = ({ post, isSelected }) => {
   const { title, body } = post;
   return (
-    <Card>
+    <Card sx={{ border: isSelected ? `3px solid ${blue[800]}` : 'none' }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
