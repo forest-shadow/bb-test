@@ -4,6 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import type { IAppState } from 'store';
 import { getPostsQuery } from 'api/postApi';
 import type { IPost } from 'types/Post.types';
+import type { AsyncState } from 'types/Store.types';
 
 export const fetchPosts = createAsyncThunk<IPost[]>(
   'posts/fetchPosts',
@@ -19,11 +20,6 @@ export const fetchPosts = createAsyncThunk<IPost[]>(
   },
 );
 
-interface AsyncState<T> {
-  isLoading: boolean;
-  error: string | null;
-  data: T | null;
-}
 export interface PostState extends AsyncState<IPost[]> {
   selected: IPost | null;
 }
@@ -66,4 +62,6 @@ const postsSlice = createSlice({
 });
 
 export const postsStateSelector = (state: IAppState): PostState => state.posts;
+export const selectedPostSelector = (state: IAppState): IPost | null =>
+  state.posts.selected;
 export const { reducer: postReducer, actions: postActions } = postsSlice;
