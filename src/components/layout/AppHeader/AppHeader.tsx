@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import { SearchInput } from 'components/form';
 import { AppToolbar } from './AppToolbar';
+import { AppFilter } from './AppFilter';
 
 export const AppHeader: FC = () => (
   <AppToolbar title="Posts App">
-    <SearchInput />
+    <AppFilter />
   </AppToolbar>
 );
