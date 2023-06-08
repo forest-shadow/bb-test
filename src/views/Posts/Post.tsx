@@ -12,7 +12,7 @@ interface PostProps {
   onClickHandler: (post: IPost) => void;
 }
 export const Post: FC<PostProps> = ({ post, isSelected, onClickHandler }) => {
-  const { title, body } = post;
+  const { id, title, body } = post;
   return (
     <Card
       sx={{
@@ -21,6 +21,9 @@ export const Post: FC<PostProps> = ({ post, isSelected, onClickHandler }) => {
       onClick={() => onClickHandler(post)}
     >
       <CardContent>
+        <Typography gutterBottom component="div">
+          postId: {id}
+        </Typography>
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>

@@ -22,6 +22,7 @@ export const PostGrid: FC<PostGridProps> = ({ postState }) => {
     <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap="2rem">
       {posts?.map((post) => (
         <Post
+          key={post.id}
           post={post}
           isSelected={post.id === selectedPost?.id}
           onClickHandler={setCurrentPost}
