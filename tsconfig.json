@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,7 +17,11 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "components/*": ["./components/*"]
+      "api/*": ["./api/*"],
+      "config": ["./config.ts"],
+      "components/*": ["./components/*"],
+      "types/*": ["./types/*"],
+      "views/*": ["./views/*"]
     }
   },
   "include": ["src"]
