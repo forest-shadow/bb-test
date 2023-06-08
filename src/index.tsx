@@ -1,6 +1,9 @@
 import React from 'react';
-import { CssBaseline } from '@mui/material';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
+import { CssBaseline } from '@mui/material';
+
+import store from 'store';
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -9,6 +12,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <CssBaseline />
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
 );
