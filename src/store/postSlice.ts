@@ -3,14 +3,32 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { IAppState } from 'store';
 import { getPostsQuery } from 'api/postApi';
+import { PostFilterType } from 'constants/api';
 import type { IPost } from 'types/Post.types';
 import type { AsyncState } from 'types/Store.types';
 
-export const fetchPosts = createAsyncThunk<IPost[]>(
+interface PostFilter {
+  filterType: PostFilterType;
+  query: string;
+}
+const filterStrategies = {
+  [PostFilterType.POST_BODY]: (query: string) => (post: IPost) =>
+    post.body.includes(query),
+  [PostFilterType.USER_ID]: (query: string) => (post: IPost) =>
+    post.userId === Number(query),
+};
+export const fetchPosts = createAsyncThunk<IPost[], PostFilter | null>(
   'posts/fetchPosts',
-  async (_, { rejectWithValue, dispatch }) => {
+  async (postFilter, { rejectWithValue, dispatch }) => {
     try {
       const response = await dispatch(getPostsQuery(null));
+
+      if (postFilter?.query && !!postFilter?.query) {
+        const filterStrategy = filterStrategies[postFilter.filterType](
+          postFilter.query,
+        );
+        return response.data.filter(filterStrategy);
+      }
 
       return response.data;
     } catch (e) {
