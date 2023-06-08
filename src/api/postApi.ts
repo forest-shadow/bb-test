@@ -22,3 +22,4 @@ const postApi = api.injectEndpoints({
 });
 
 export const getPostsQuery = postApi.endpoints.getPosts.initiate;
+export const getPostCommentsQuery = postApi.endpoints.getPostComments.initiate;
