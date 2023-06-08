@@ -20,10 +20,14 @@
   },
   "plugins": ["react"],
   "rules": {
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
     "react/function-component-definition": "off",
     "react/jsx-filename-extension": [
       2,
