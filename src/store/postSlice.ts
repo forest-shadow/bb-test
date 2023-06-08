@@ -38,7 +38,11 @@ const initialState: PostState = {
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentPost: (state: PostState, action: PayloadAction<IPost>) => {
+      state.selected = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -62,4 +66,4 @@ const postsSlice = createSlice({
 });
 
 export const postsStateSelector = (state: IAppState): PostState => state.posts;
-export const { reducer: postReducer } = postsSlice;
+export const { reducer: postReducer, actions: postActions } = postsSlice;
