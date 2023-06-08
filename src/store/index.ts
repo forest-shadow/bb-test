@@ -6,14 +6,18 @@ import { api } from 'api';
 import config from 'config';
 import { postReducer } from './postSlice';
 import type { PostState } from './postSlice';
+import { commentsReducer } from './commentSlice';
+import type { CommentState } from './commentSlice';
 
 const reducer = combineReducers({
   posts: postReducer,
+  comments: commentsReducer,
   [api.reducerPath]: api.reducer,
 });
 
 export interface IAppState {
   posts: PostState;
+  comments: CommentState;
 }
 const store = configureStore({
   reducer,
