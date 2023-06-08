@@ -4,14 +4,19 @@ import Skeleton from '@mui/material/Skeleton';
 
 export const PostSkeleton: FC = () => (
   <Card>
-    <Skeleton variant="rectangular" width="100%" height={172} />
+    <Skeleton
+      variant="rectangular"
+      animation="wave"
+      width="100%"
+      height={172}
+    />
   </Card>
 );
 
 export const PostGridSkeleton: FC = () => (
   <>
-    {[...Array(9).keys()].map(() => (
-      <PostSkeleton />
+    {[...Array(9).keys()].map((key) => (
+      <PostSkeleton key={key} />
     ))}
   </>
 );
