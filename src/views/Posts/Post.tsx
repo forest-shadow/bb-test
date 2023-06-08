@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -12,7 +13,7 @@ interface PostProps {
   onClickHandler: (post: IPost) => void;
 }
 export const Post: FC<PostProps> = ({ post, isSelected, onClickHandler }) => {
-  const { id, title, body } = post;
+  const { id, userId, title, body } = post;
   return (
     <Card
       sx={{
@@ -21,9 +22,15 @@ export const Post: FC<PostProps> = ({ post, isSelected, onClickHandler }) => {
       onClick={() => onClickHandler(post)}
     >
       <CardContent>
-        <Typography gutterBottom component="div">
-          postId: {id}
-        </Typography>
+        <Box display="flex" gap="1rem">
+          <Typography gutterBottom component="div">
+            postId: {id}
+          </Typography>
+          <Typography gutterBottom component="div">
+            userId: {userId}
+          </Typography>
+        </Box>
+
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
