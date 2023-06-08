@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import type { IComment } from 'types/Comment.types';
 
 interface CommentProps {
-  comment: Partial<IComment>;
+  comment: IComment;
 }
 export const Comment: FC<CommentProps> = ({ comment }) => {
   const { id, postId, body } = comment;
