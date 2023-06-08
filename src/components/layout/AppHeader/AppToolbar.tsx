@@ -8,7 +8,12 @@ interface AppToolbarProps {
 export const AppToolbar: FC<AppToolbarProps> = ({ title, children }) => (
   <AppBar position="static">
     <Toolbar>
-      <Box display="flex" justifyContent="space-between" flexBasis="100%">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        flexBasis="100%"
+        alignItems="center"
+      >
         <Typography variant="h6" component="h1" sx={{ flexGrow: 1 }}>
           {title}
         </Typography>
