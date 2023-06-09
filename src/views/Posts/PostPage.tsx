@@ -10,7 +10,7 @@ interface PostPageProps {
 export const PostPage: FC<PostPageProps> = ({ postState }) => (
   <Box>
     <Typography variant="h4" component="h2" color="white" marginBottom="2rem">
-      News
+      Posts
     </Typography>
     <PostGrid postState={postState} />
   </Box>
