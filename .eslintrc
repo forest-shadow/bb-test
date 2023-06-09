@@ -30,6 +30,7 @@
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-param-reassign": "off",
     "no-shadow": "off",
+    "no-unused-vars": "warn",
     "react/function-component-definition": "off",
     "react/jsx-filename-extension": [
       2,
