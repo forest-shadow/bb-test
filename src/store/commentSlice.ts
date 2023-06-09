@@ -9,7 +9,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { getPostCommentsQuery } from 'api/postApi';
 import type { IAppState } from 'store';
-import type { IComment } from 'types/Comment.types';
+import type { IComment, ICommentReply } from 'types/Comment.types';
 import type { ITag } from 'components/form/TagInput';
 
 export const fetchComments = createAsyncThunk<IComment[], number>(
@@ -50,6 +50,16 @@ const commentsSlice = createSlice({
       commentsAdapter.setOne(state, {
         ...action.payload.comment,
         tags: [...action.payload.tags],
+      });
+    },
+    setCommentReply: (
+      state,
+      action: PayloadAction<{ comment: IComment; reply: ICommentReply }>,
+    ) => {
+      console.log(action.payload.comment);
+      commentsAdapter.setOne(state, {
+        ...action.payload.comment,
+        reply: { ...action.payload.reply },
       });
     },
   },
