@@ -1,9 +1,16 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { NormalizedAsyncState } from 'types/Store.types';
+import {
+  createAsyncThunk,
+  createEntityAdapter,
+  createSlice,
+  createSelector,
+} from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type { IAppState } from 'store';
 import { getPostCommentsQuery } from 'api/postApi';
+import type { IAppState } from 'store';
 import type { IComment } from 'types/Comment.types';
-import type { AsyncState } from 'types/Store.types';
+import type { ITag } from 'components/form/TagInput';
 
 export const fetchComments = createAsyncThunk<IComment[], number>(
   'comments/fetchComments',
@@ -19,20 +26,31 @@ export const fetchComments = createAsyncThunk<IComment[], number>(
   },
 );
 
-export interface CommentState extends AsyncState<IComment[]> {}
-
+const commentsAdapter = createEntityAdapter<IComment>({
+  selectId: (comment) => comment.id,
+});
+export interface CommentState extends NormalizedAsyncState<IComment> {}
 const initialState: CommentState = {
   isLoading: false,
   error: null,
-  data: null,
+  ids: [],
+  entities: {},
 };
-
 const commentsSlice = createSlice({
   name: 'comments',
-  initialState,
+  initialState: commentsAdapter.getInitialState<CommentState>(initialState),
   reducers: {
-    resetComments: (state: CommentState) => {
-      state.data = null;
+    resetComments: () => {
+      commentsAdapter.getInitialState(initialState);
+    },
+    setCommentTags: (
+      state,
+      action: PayloadAction<{ comment: IComment; tags: ITag[] }>,
+    ) => {
+      commentsAdapter.setOne(state, {
+        ...action.payload.comment,
+        tags: [...action.payload.tags],
+      });
     },
   },
   extraReducers: (builder) => {
@@ -43,7 +61,7 @@ const commentsSlice = createSlice({
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload.slice(0, 3);
+        commentsAdapter.setAll(state, action.payload.slice(0, 3));
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.isLoading = false;
@@ -52,7 +70,19 @@ const commentsSlice = createSlice({
   },
 });
 
-export const commentsStateSelector = (state: IAppState): CommentState =>
-  state.comments;
+const { selectAll: selectAllComments } = commentsAdapter.getSelectors(
+  (state: IAppState) => state.comments,
+);
+
+const stateSelector = (state: IAppState): CommentState => state.comments;
+export const commentsStateSelector = createSelector(
+  selectAllComments,
+  stateSelector,
+  (comments, commentsState) => ({
+    isLoading: commentsState.isLoading,
+    data: comments,
+  }),
+);
+
 export const { reducer: commentsReducer, actions: commentActions } =
   commentsSlice;
