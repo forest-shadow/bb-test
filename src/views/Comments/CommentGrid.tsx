@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 import { commentsStateSelector, commentActions } from 'store/commentSlice';
 import type { TThunkDispatch } from 'types/Store.types';
-import type { IComment } from 'types/Comment.types';
+import type { IComment, ICommentReply } from 'types/Comment.types';
 import type { ITag } from 'components/form/TagInput/TagInput';
 import { Comment } from './Comment';
 import { CommentGridSkeleton } from './CommentGridSkeleton';
@@ -25,6 +25,14 @@ export const CommentGrid: FC = () => {
     dispatch(commentActions.setCommentTags({ comment, tags }));
   }, []);
 
+  const handleReplySet = useCallback(
+    (comment: IComment, reply: ICommentReply) => {
+      console.log('handleReplyAdding', comment, reply);
+      dispatch(commentActions.setCommentReply({ comment, reply }));
+    },
+    [],
+  );
+
   return (
     <Box display="flex" flexDirection="column" gap="1rem">
       {isLoading && <CommentGridSkeleton />}
@@ -36,6 +44,7 @@ export const CommentGrid: FC = () => {
             comment={comment}
             key={comment.id}
             onTagSelect={handleTagSelection}
+            onReplySet={handleReplySet}
             tags={commentTags}
           />
         ))}
