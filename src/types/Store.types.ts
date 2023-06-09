@@ -3,8 +3,14 @@ import type { IAppState } from 'store';
 
 export type TThunkDispatch = ThunkDispatch<IAppState, unknown, AnyAction>;
 
-export interface AsyncState<T> {
+export interface AsyncState {
   isLoading: boolean;
   error: string | null;
-  data: T | null;
+}
+export interface RawAsyncState<T> extends AsyncState {
+  data: T[] | null;
+}
+export interface NormalizedAsyncState<T> extends AsyncState {
+  ids: number[];
+  entities: Record<number, T>;
 }

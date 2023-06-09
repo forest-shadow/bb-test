@@ -5,7 +5,7 @@ import type { IAppState } from 'store';
 import { getPostsQuery } from 'api/postApi';
 import { PostFilterType } from 'constants/api';
 import type { IPost } from 'types/Post.types';
-import type { AsyncState } from 'types/Store.types';
+import type { RawAsyncState } from 'types/Store.types';
 
 interface PostFilter {
   filterType: PostFilterType;
@@ -38,7 +38,7 @@ export const fetchPosts = createAsyncThunk<IPost[], PostFilter | null>(
   },
 );
 
-export interface PostState extends AsyncState<IPost[]> {
+export interface PostState extends RawAsyncState<IPost> {
   selected: IPost | null;
 }
 
