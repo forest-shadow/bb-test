@@ -12,7 +12,7 @@
 5. Run the app using `npm run start`
 
 ## Implementation Details and Restrictions
-From the start I decided to use `redux-toolkit` library to explore more features from it, as it was very interesting to try some other tools different from `createSlice` and selectors I used before. It adds extra difficulty and, unfortunately, I was not able to fully implement all the required features before the deadline at 9th June. On other hand, I added demo of usage different redux toolkit features.
+From the start I decided to use `redux-toolkit` library to explore more features from it, as it was very interesting to try some other tools different from `createSlice` and selectors I used before. 
 
 ### Restrictions & Assumptions
 For the sake of demo, it was assumed that api will always return no more than 9 posts and 3 comments.
@@ -40,12 +40,6 @@ Aside of requirements, were added:
 * no ErrorBoundary
 * color and magic variable hardcode in styled components
 * autocomplete component warning
-
-### Not implemented features progress:
-* comment reply. You can look at the WIP on that in dedicated [branch](https://github.com/forest-shadow/bb-test/tree/add-comment-replies). That functionality is working, but quite buggy and I decided to not merge it in the `main`.
-
-### P.S.>
-Overall, I think my decision to use redux toolkit was overkill here, since I spent too much time on it instead of polishing all the required features and the app structure. But what is done is done.
 
 ----
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
