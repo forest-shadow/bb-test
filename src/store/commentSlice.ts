@@ -47,7 +47,7 @@ const commentsSlice = createSlice({
       state,
       action: PayloadAction<{ comment: IComment; tags: ITag[] }>,
     ) => {
-      commentsAdapter.setOne(state, {
+      commentsAdapter.upsertOne(state, {
         ...action.payload.comment,
         tags: [...action.payload.tags],
       });
@@ -57,7 +57,7 @@ const commentsSlice = createSlice({
       action: PayloadAction<{ comment: IComment; reply: ICommentReply }>,
     ) => {
       console.log(action.payload.comment);
-      commentsAdapter.setOne(state, {
+      commentsAdapter.upsertOne(state, {
         ...action.payload.comment,
         reply: { ...action.payload.reply },
       });
