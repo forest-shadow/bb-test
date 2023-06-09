@@ -1,17 +1,13 @@
 import type { FC } from 'react';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
-import type { PostState } from 'store/postSlice';
 import { PostGrid } from './PostGrid';
 
-interface PostPageProps {
-  postState: PostState;
-}
-export const PostPage: FC<PostPageProps> = ({ postState }) => (
+export const PostPage: FC = () => (
   <Box>
     <Typography variant="h4" component="h2" color="white" marginBottom="2rem">
       News
     </Typography>
-    <PostGrid postState={postState} />
+    <PostGrid />
   </Box>
 );
